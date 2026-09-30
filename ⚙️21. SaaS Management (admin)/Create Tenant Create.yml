@@ -1,0 +1,38 @@
+info:
+  name: Create Tenant Create
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/saas/create-college/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+      disabled: true
+  body:
+    type: json
+    data: "{\r
+
+      \  \"name\": \"VNIT Nagpur\",\r
+
+      \  \"domain_name\": \"vnitnagpur.campusnexus.in\",\r
+
+      \  \"admin_username\": \"admin_vnit\",\r
+
+      \  \"admin_email\": \"admin@vnit.edu.in\",\r
+
+      \  \"admin_password\": \"SecurePass456!\"\r
+
+      }"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

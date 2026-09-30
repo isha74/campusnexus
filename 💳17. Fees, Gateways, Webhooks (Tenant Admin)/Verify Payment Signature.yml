@@ -1,0 +1,64 @@
+info:
+  name: Verify Payment Signature
+  type: http
+  seq: 12
+
+http:
+  method: POST
+  url: "{{baseUrl}}/payments/verify"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "razorpay_order_id": "order_Fh9a8S72f",
+        "razorpay_payment_id": "pay_Fh9a8S72g",
+        "razorpay_signature": "sha256_signature_string"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/payments/verify"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "razorpay_order_id": "order_Fh9a8S72f",
+            "razorpay_payment_id": "pay_Fh9a8S72g",
+            "razorpay_signature": "sha256_signature_string"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "success",
+            "message": "Payment verified and updated."
+          }

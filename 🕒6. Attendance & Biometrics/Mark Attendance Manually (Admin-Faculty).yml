@@ -1,0 +1,63 @@
+info:
+  name: Mark Attendance Manually (Admin/Faculty)
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/attendance/mark/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{faculty_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "student_id": "STU123",
+        "lecture_id": 1,
+        "status": "present"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/attendance/mark/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{faculty_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "student_id": "STU123",
+            "lecture_id": 1,
+            "status": "present"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Attendance marked successfully."
+          }

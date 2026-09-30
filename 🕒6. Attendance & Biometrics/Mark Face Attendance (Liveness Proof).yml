@@ -1,0 +1,66 @@
+info:
+  name: Mark Face Attendance (Liveness Proof)
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/mark-attendance"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "session_id": "sess_123456",
+        "photo": "base64_captured_photo_string",
+        "lat": 12.9716,
+        "lng": 77.5946
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/mark-attendance"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "session_id": "sess_123456",
+            "photo": "base64_captured_photo_string",
+            "lat": 12.9716,
+            "lng": 77.5946
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "success",
+            "message": "Liveness verified. Attendance logged."
+          }

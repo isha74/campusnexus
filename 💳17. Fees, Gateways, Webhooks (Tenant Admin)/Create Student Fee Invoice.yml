@@ -1,0 +1,66 @@
+info:
+  name: Create Student Fee Invoice
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/fees/invoices/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "student": 5,
+        "fee_structure": 1,
+        "total_amount": 45000.00,
+        "due_date": "2026-11-30"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/fees/invoices/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "student": 5,
+            "fee_structure": 1,
+            "total_amount": 45000.00,
+            "due_date": "2026-11-30"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1,
+            "amount_due": "45000.00"
+          }

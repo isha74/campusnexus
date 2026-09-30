@@ -1,0 +1,47 @@
+info:
+  name: Get Bus Route QR Code
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/bus/routes/1/qr"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/bus/routes/1/qr"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "qr_code_url": "http://localhost:8000/media/bus_qrs/route_1.png"
+          }

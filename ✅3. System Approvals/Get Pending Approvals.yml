@@ -1,0 +1,53 @@
+info:
+  name: Get Pending Approvals
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/approvals/pending"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/approvals/pending"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "pending_registrations": [
+              {
+                "id": 5,
+                "username": "faculty_johndoe",
+                "email": "john@test.com"
+              }
+            ]
+          }

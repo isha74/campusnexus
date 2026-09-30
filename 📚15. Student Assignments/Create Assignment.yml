@@ -1,0 +1,70 @@
+info:
+  name: Create Assignment
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/assignments/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{faculty_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "title": "Assignment 1: Binary Search Trees",
+        "description": "Implement insertion, deletion, and in-order traversal in C++ or Python.",
+        "department_id": 1,
+        "course_id": 1,
+        "due_date": "2026-10-15T23:59:59Z",
+        "notify_parents": false
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/assignments/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{faculty_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "title": "Assignment 1: Binary Search Trees",
+            "description": "Implement insertion, deletion, and in-order traversal in C++ or Python.",
+            "department_id": 1,
+            "course_id": 1,
+            "due_date": "2026-10-15T23:59:59Z",
+            "notify_parents": false
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1,
+            "title": "Implement ResNet"
+          }

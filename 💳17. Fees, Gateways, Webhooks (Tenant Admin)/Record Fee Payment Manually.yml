@@ -1,0 +1,65 @@
+info:
+  name: Record Fee Payment Manually
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{baseUrl}}/fees/invoices/2/pay/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "amount_paid": 40000.00,
+        "payment_mode": "upi",
+        "transaction_reference": "UPI_REF_9876543210",
+        "remarks": "Paid full semester 1 tuition fee via Google Pay."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/fees/invoices/2/pay/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "amount_paid": 40000.00,
+            "payment_mode": "upi",
+            "transaction_reference": "UPI_REF_9876543210",
+            "remarks": "Paid full semester 1 tuition fee via Google Pay."
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Payment logged successfully. Invoice status: paid."
+          }

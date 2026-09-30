@@ -1,0 +1,63 @@
+info:
+  name: Create Payment Order Gateway
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{baseUrl}}/payments/orders/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{student_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "invoice_id": 2,
+        "amount": 1000.00
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/payments/orders/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{student_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "invoice_id": 2,
+            "amount": 1000.00
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "order_id": "order_Fh9a8S72f",
+            "amount": 4500000,
+            "currency": "INR"
+          }

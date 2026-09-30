@@ -1,0 +1,74 @@
+info:
+  name: Get All Teaching Staff Profiles
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: "{{baseUrl}}/teaching-staff/user?search=John&page=1&page_size=10"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  params:
+    - name: search
+      value: John
+      type: query
+    - name: page
+      value: "1"
+      type: query
+    - name: page_size
+      value: "10"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/teaching-staff/user?search=John&page=1&page_size=10"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      params:
+        - name: search
+          value: John
+          type: query
+        - name: page
+          value: "1"
+          type: query
+        - name: page_size
+          value: "10"
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "total_count": 1,
+            "results": [
+              {
+                "id": 2,
+                "employee_id": "XYZ123",
+                "contact_number": "+9198765"
+              }
+            ]
+          }

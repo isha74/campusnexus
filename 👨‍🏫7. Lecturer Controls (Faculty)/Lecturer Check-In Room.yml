@@ -1,0 +1,63 @@
+info:
+  name: Lecturer Check-In Room
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/lecturer/check-in"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "classroom_id": 1,
+        "lat": 12.9716,
+        "lng": 77.5946
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/lecturer/check-in"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "classroom_id": 1,
+            "lat": 12.9716,
+            "lng": 77.5946
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Lecturer check-in successful."
+          }

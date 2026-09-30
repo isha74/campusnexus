@@ -1,0 +1,29 @@
+info:
+  name: Student Onboard Request O T P
+  type: http
+  seq: 14
+
+http:
+  method: POST
+  url: "{{baseUrl}}/student/onboard/request-otp"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "email": "user@college.edu.in",
+        "otp": "123456"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

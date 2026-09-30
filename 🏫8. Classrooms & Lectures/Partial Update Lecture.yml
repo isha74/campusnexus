@@ -1,0 +1,29 @@
+info:
+  name: Partial Update Lecture
+  type: http
+  seq: 12
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/lectures/:pk/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  params:
+    - name: pk
+      value: "1"
+      type: path
+  body:
+    type: json
+    data: "{\r\n  \"faculty\": 2\r\n}\r\n"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

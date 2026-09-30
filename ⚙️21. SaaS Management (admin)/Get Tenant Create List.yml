@@ -1,0 +1,23 @@
+info:
+  name: Get Tenant Create List
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/saas/create-college/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

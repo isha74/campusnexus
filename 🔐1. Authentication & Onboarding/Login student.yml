@@ -1,0 +1,71 @@
+info:
+  name: Login student
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{baseUrl}}/login/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+      disabled: true
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+      disabled: true
+  body:
+    type: json
+    data: |
+      {
+        "username": "student_rahul",
+        "password": "Password123!"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/login/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+          disabled: true
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+          disabled: true
+      body:
+        type: json
+        data: |
+          {
+            "username": "student_rahul",
+            "password": "Password123!"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "access": "jwt_access_token_string",
+            "refresh": "jwt_refresh_token_string",
+            "user_id": 1,
+            "user": "demo_student",
+            "roleName": "student",
+            "tenant_schema": "public",
+            "tenant_domain": "localhost"
+          }

@@ -1,0 +1,73 @@
+info:
+  name: Create Placement Recruitment Drives
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/recruitment-drives/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "company_name": "Google India",
+        "job_title": "Associate Software Engineer",
+        "job_description": "Full-stack development, Python, Distributed Systems",
+        "eligibility_criteria": "B.Tech CSE / IT with minimum 7.5 CGPA and no active backlogs",
+        "package_lpa": "24.50",
+        "drive_date": "2026-11-15",
+        "status": "Active"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/recruitment-drives/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "company_name": "Google India",
+            "job_title": "Associate Software Engineer",
+            "job_description": "Full-stack development, Python, Distributed Systems",
+            "eligibility_criteria": "B.Tech CSE / IT with minimum 7.5 CGPA and no active backlogs",
+            "package_lpa": "24.50",
+            "drive_date": "2026-11-15",
+            "status": "Active"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "company_name": "Google",
+            "job_role": "Software Engineer",
+            "drive_date": "2026-09-01"
+          }

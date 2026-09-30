@@ -1,0 +1,30 @@
+info:
+  name: Update Assignment
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/assignments/:pk"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  params:
+    - name: pk
+      value: "1"
+      type: path
+      description: The pk parameter
+  body:
+    type: json
+    data: "{}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

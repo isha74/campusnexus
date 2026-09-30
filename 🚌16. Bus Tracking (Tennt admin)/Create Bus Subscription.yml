@@ -1,0 +1,70 @@
+info:
+  name: Create Bus Subscription
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{baseUrl}}/bus/subscriptions/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "user": 5,
+        "route": 1,
+        "boarding_stop": "Gate 1",
+        "status": "active",
+        "valid_from": "2026-07-01",
+        "valid_until": "2027-06-30"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/bus/subscriptions/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "user": 5,
+            "route": 1,
+            "boarding_stop": "Gate 1",
+            "status": "active",
+            "valid_from": "2026-07-01",
+            "valid_until": "2027-06-30"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 5,
+            "status": "active"
+          }

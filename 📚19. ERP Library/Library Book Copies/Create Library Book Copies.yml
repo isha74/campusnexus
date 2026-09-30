@@ -1,0 +1,64 @@
+info:
+  name: Create Library Book Copies
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/book-copies/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "book": 1,
+        "barcode": "LIB-CS-2026-001",
+        "status": "Available"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/book-copies/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "book": 1,
+            "barcode": "LIB-CS-2026-001",
+            "status": "Available"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "book_id": 1,
+            "copy_number": "BC-001-A"
+          }

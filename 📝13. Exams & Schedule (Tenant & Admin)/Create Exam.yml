@@ -1,0 +1,80 @@
+info:
+  name: Create Exam
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/exams/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "name": "Data Structures Mid-Term Exam",
+        "exam_type_id": 1,
+        "department_id": 1,
+        "course_id": 1,
+        "classroom_id": 1,
+        "date": "2026-10-25",
+        "start_time": "10:00:00",
+        "end_time": "12:00:00",
+        "total_marks": 50,
+        "passing_marks": 18,
+        "instructions": "No electronic devices allowed. Bring your college ID card."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/exams/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "name": "Data Structures Mid-Term Exam",
+            "exam_type_id": 1,
+            "department_id": 1,
+            "course_id": 1,
+            "classroom_id": 1,
+            "date": "2026-10-25",
+            "start_time": "10:00:00",
+            "end_time": "12:00:00",
+            "total_marks": 50,
+            "passing_marks": 18,
+            "instructions": "No electronic devices allowed. Bring your college ID card."
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1,
+            "title": "Calculus Midterm"
+          }

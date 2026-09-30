@@ -1,0 +1,31 @@
+info:
+  name: "WS Event: Client Subscribe to Route"
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: ws:/socket-event-subscribe-route
+  body:
+    type: text
+    data: |-
+      {
+        "action": "track_route",
+        "route_id": 1
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  JSON payload sent by client (student/admin) after WS connect to track a specific route.
+
+  Payload:
+  {
+    "action": "track_route",
+    "route_id": 1
+  }

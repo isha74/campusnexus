@@ -1,0 +1,25 @@
+info:
+  name: Bus Trip Start
+  type: http
+  seq: 21
+
+http:
+  method: POST
+  url: "{{baseUrl}}/bus/driver/trip/start/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: text
+    data: "{}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

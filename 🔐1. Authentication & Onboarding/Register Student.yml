@@ -1,0 +1,78 @@
+info:
+  name: Register Student
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/register/student"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "username": "student_rahul",
+        "email": "rahul@campusnexus.in",
+        "password": "Password123!",
+        "password2": "Password123!",
+        "first_name": "Rahul",
+        "last_name": "Patil",
+        "student_id": "STU-2026-001",
+        "department_id": 1,
+        "admission_number": "ADM-2026-001",
+        "current_semester_year": "Sem 1",
+        "batch_academic_year": "2026-2030"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/register/student"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "username": "student_rahul",
+            "email": "rahul@campusnexus.in",
+            "password": "Password123!",
+            "password2": "Password123!",
+            "first_name": "Rahul",
+            "last_name": "Patil",
+            "student_id": "STU-2026-001",
+            "department_id": 1,
+            "admission_number": "ADM-2026-001",
+            "current_semester_year": "Sem 1",
+            "batch_academic_year": "2026-2030"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Student registration successful. Please check your email for the OTP.",
+            "username": "student_johndoe",
+            "email": "johndoe@college.edu.in",
+            "role": "student"
+          }

@@ -1,0 +1,70 @@
+info:
+  name: Create Lecture
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/lectures/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Data Structures Lecture 1",
+        "subject": "Data Structures & Algorithms",
+        "faculty": 2,
+        "classroom": 1,
+        "start_time": "2026-07-08T10:00:00Z",
+        "end_time": "2026-07-08T11:00:00Z"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/api/lectures/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "name": "Data Structures Lecture 1",
+            "subject": "Data Structures & Algorithms",
+            "faculty": 2,
+            "classroom": 1,
+            "start_time": "2026-07-08T10:00:00Z",
+            "end_time": "2026-07-08T11:00:00Z"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1,
+            "topic": "Intro to AI"
+          }

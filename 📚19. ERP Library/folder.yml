@@ -1,0 +1,7 @@
+info:
+  name: 📚19. ERP Library
+  type: folder
+  seq: 13
+
+request:
+  auth: inherit

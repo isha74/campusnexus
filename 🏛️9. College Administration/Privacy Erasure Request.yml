@@ -1,0 +1,30 @@
+info:
+  name: Privacy Erasure Request
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/college/user-permissions/:user_id"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  params:
+    - name: user_id
+      value: "1"
+      type: path
+      description: The user_id parameter
+  body:
+    type: text
+    data: "{}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

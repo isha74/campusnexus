@@ -1,0 +1,67 @@
+info:
+  name: Get All Attendance Logs
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/attendance/all?student_id=STU123&status=present"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{faculty_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  params:
+    - name: student_id
+      value: STU123
+      type: query
+    - name: status
+      value: present
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/attendance/all?student_id=STU123&status=present"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{faculty_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      params:
+        - name: student_id
+          value: STU123
+          type: query
+        - name: status
+          value: present
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "id": 10,
+              "student": "demo_student",
+              "lecture": "Maths 101",
+              "status": "present",
+              "timestamp": "2026-07-08T10:00:00Z"
+            }
+          ]

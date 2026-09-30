@@ -1,0 +1,45 @@
+info:
+  name: Update Salary
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/payroll/structures/:user_id/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  params:
+    - name: user_id
+      value: "1"
+      type: path
+  body:
+    type: json
+    data: "{\r
+
+      \  \"basic_pay\": 50000.00,\r
+
+      \  \"hra\": 15000.00,\r
+
+      \  \"da\": 10000.00,\r
+
+      \  \"ta\": 5000.00,\r
+
+      \  \"other_allowances\": 2000.00,\r
+
+      \  \"pf_deduction\": 6000.00,\r
+
+      \  \"tds_deduction\": 4000.00\r
+
+      }\r\n"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

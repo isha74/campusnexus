@@ -1,0 +1,71 @@
+info:
+  name: Create Library Books
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/books/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "title": "Introduction to Algorithms (4th Edition)",
+        "author": "Thomas H. Cormen, Charles E. Leiserson",
+        "isbn": "978-0262046305",
+        "publisher": "MIT Press",
+        "total_copies": 5,
+        "available_copies": 5
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/books/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "title": "Introduction to Algorithms (4th Edition)",
+            "author": "Thomas H. Cormen, Charles E. Leiserson",
+            "isbn": "978-0262046305",
+            "publisher": "MIT Press",
+            "total_copies": 5,
+            "available_copies": 5
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "title": "Introduction to Algorithms",
+            "author": "CLRS",
+            "isbn": "9780262033848"
+          }

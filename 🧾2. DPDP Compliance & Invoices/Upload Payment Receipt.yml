@@ -1,0 +1,59 @@
+info:
+  name: Upload Payment Receipt
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/billing/invoices/1/upload-receipt"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "receipt_file": "base64_encoded_file_or_multipart_binary"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/billing/invoices/1/upload-receipt"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "receipt_file": "base64_encoded_file_or_multipart_binary"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Receipt uploaded successfully. Review pending."
+          }

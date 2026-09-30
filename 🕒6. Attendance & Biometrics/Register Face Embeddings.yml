@@ -1,0 +1,63 @@
+info:
+  name: Register Face Embeddings
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/register-face"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "front": "base64_face_image_string_front",
+        "left": "base64_face_image_string_left",
+        "right": "base64_face_image_string_right"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/register-face"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "front": "base64_face_image_string_front",
+            "left": "base64_face_image_string_left",
+            "right": "base64_face_image_string_right"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Face registered successfully."
+          }

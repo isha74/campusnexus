@@ -1,0 +1,67 @@
+info:
+  name: Update Self Profile
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/user"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "contact_number": "+91 9876543210",
+        "user": {
+          "first_name": "John",
+          "last_name": "Doe"
+        }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/user"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "contact_number": "+91 9876543210",
+            "user": {
+              "first_name": "John",
+              "last_name": "Doe"
+            }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Profile updated successfully."
+          }

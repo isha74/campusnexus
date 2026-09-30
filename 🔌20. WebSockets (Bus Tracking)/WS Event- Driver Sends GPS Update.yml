@@ -1,0 +1,31 @@
+info:
+  name: "WS Event: Driver Sends GPS Update"
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: ws:/socket-event-driver-gps
+  body:
+    type: text
+    data: |-
+      {
+        "lat": 12.9716,
+        "lng": 77.5946
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  JSON payload sent by the authenticated driver client every few seconds to broadcast GPS coordinates.
+
+  Payload:
+  {
+    "lat": 12.9716,
+    "lng": 77.5946
+  }

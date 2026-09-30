@@ -1,0 +1,51 @@
+info:
+  name: Get User Permissions Detail
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/college/user-permissions/3"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/college/user-permissions/3"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "user_id": 3,
+            "permissions": [
+              "can_mark_attendance",
+              "can_grade_assignment"
+            ]
+          }

@@ -1,0 +1,7 @@
+info:
+  name: Valuation Scanned Papers
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

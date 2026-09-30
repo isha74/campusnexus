@@ -1,0 +1,65 @@
+info:
+  name: Mark Attendance via Random Code & Geofence
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/attendance/lecture-checkin"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "lecture_id": 1,
+        "code": "A9B8",
+        "lat": 12.9716,
+        "lng": 77.5946
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/attendance/lecture-checkin"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "lecture_id": 1,
+            "code": "A9B8",
+            "lat": 12.9716,
+            "lng": 77.5946
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Check-in successful. Attendance marked present."
+          }

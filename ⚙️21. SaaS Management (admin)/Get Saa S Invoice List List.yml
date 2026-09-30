@@ -1,0 +1,22 @@
+info:
+  name: Get Saa S Invoice List List
+  type: http
+  seq: 7
+
+http:
+  method: GET
+  url: "{{baseUrl}}/saas/invoices"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

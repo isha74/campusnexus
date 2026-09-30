@@ -1,0 +1,7 @@
+info:
+  name: 💰12. Payroll (Tenant admin)
+  type: folder
+  seq: 4
+
+request:
+  auth: inherit

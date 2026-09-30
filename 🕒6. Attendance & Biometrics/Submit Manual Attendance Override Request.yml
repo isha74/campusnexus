@@ -1,0 +1,61 @@
+info:
+  name: Submit Manual Attendance Override Request
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{baseUrl}}/student/request-manual-attendance"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "lecture_id": 2,
+        "reason": "Biometric device sensor failed on cold fingers."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/student/request-manual-attendance"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "lecture_id": 2,
+            "reason": "Biometric device sensor failed on cold fingers."
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Manual override request submitted successfully."
+          }

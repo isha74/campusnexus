@@ -1,0 +1,7 @@
+info:
+  name: 🏡19. ERP Hostel
+  type: folder
+  seq: 11
+
+request:
+  auth: inherit

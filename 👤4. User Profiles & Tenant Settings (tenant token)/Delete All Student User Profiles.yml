@@ -1,0 +1,22 @@
+info:
+  name: Delete All Student User Profiles
+  type: http
+  seq: 22
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/student/user"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

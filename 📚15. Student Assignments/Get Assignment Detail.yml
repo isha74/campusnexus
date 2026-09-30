@@ -1,0 +1,27 @@
+info:
+  name: Get Assignment Detail
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: "{{baseUrl}}/assignments/:pk"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{faculty_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  params:
+    - name: pk
+      value: "1"
+      type: path
+      description: The pk parameter
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

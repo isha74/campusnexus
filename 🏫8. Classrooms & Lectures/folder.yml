@@ -1,0 +1,7 @@
+info:
+  name: 🏫8. Classrooms & Lectures
+  type: folder
+  seq: 23
+
+request:
+  auth: inherit

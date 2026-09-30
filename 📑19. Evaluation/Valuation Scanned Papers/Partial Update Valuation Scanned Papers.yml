@@ -1,0 +1,75 @@
+info:
+  name: Partial Update Valuation Scanned Papers
+  type: http
+  seq: 5
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/scanned-papers/1/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "allocated_marks": "46.50",
+        "question_scores": {
+          "Q1": 18.0,
+          "Q2": 15.0,
+          "Q3": 13.5
+        },
+        "status": "Evaluated",
+        "remarks": "Excellent code implementation and AVL balancing."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/scanned-papers/1/"
+      method: PATCH
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "allocated_marks": "46.50",
+            "question_scores": {
+              "Q1": 18.0,
+              "Q2": 15.0,
+              "Q3": 13.5
+            },
+            "status": "Evaluated",
+            "remarks": "Excellent code implementation and AVL balancing."
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "session_id": 1,
+            "student_id": "STU123",
+            "paper_code": "PAP-999"
+          }

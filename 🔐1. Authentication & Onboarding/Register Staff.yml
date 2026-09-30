@@ -1,0 +1,84 @@
+info:
+  name: Register Staff
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/register/staff/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+    - name: Host
+      value: "{{domain}}"
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+          "username": "prof_meera_new",
+          "email": "meera_new@campusnexus.in",
+          "password": "Password123!",
+          "password2": "Password123!",
+          "role": "Faculty",
+          "first_name": "Meera",
+          "last_name": "Sharma",
+          "department_id": 1,
+          "employee_id": "FAC-CSE-003",
+          "designation": "Associate Professor"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/register/staff/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+        - name: Host
+          value: "{{domain}}"
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+              "username": "prof_meera_new",
+              "email": "meera_new@campusnexus.in",
+              "password": "Password123!",
+              "password2": "Password123!",
+              "role": "Faculty",
+              "first_name": "Meera",
+              "last_name": "Sharma",
+              "department_id": 1,
+              "employee_id": "FAC-CSE-003",
+              "designation": "Associate Professor"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Staff registration successful. Account status is set to active/pending admin approval.",
+            "username": "lecturer_jane"
+          }

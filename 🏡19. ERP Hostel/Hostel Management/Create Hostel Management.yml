@@ -1,0 +1,66 @@
+info:
+  name: Create Hostel Management
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/hostels/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "name": "Sahyadri Boys Hostel",
+        "gender_type": "Boys",
+        "capacity": 200,
+        "address": "North Campus, Gate 2"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/hostels/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "name": "Sahyadri Boys Hostel",
+            "gender_type": "Boys",
+            "capacity": 200,
+            "address": "North Campus, Gate 2"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "name": "Nilgiri Hostel",
+            "capacity": 200
+          }

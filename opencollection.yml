@@ -1,0 +1,31 @@
+opencollection: 1.0.0
+
+info:
+  name: CampusFlow API & WebSocket Suite
+
+request:
+  variables:
+    - name: baseUrl
+      value: ""
+    - name: admin_token
+      value: ""
+    - name: schema
+      value: ""
+    - name: jwtToken
+      value: ""
+    - name: domain
+      value: ""
+    - name: faculty_token
+      value: ""
+    - name: student_token
+      value: ""
+
+docs:
+  content: Comprehensive Postman collection containing all REST API endpoints (including new bus route tracking, online payment integrations, DPDP consent workflows, and competitive ERP modules) plus WebSocket messaging definitions.
+  type: text/markdown
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

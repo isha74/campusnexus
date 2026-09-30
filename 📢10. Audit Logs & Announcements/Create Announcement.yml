@@ -1,0 +1,68 @@
+info:
+  name: Create Announcement
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/announcements/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "title": "Mid-Term Examination Schedule Released",
+        "content": "All CSE students are requested to check the examination timetable for the upcoming Data Structures Mid-Term Exam.",
+        "priority": "high",
+        "target_roles": ["student", "Faculty"],
+        "is_pinned": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/announcements/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "title": "Mid-Term Examination Schedule Released",
+            "content": "All CSE students are requested to check the examination timetable for the upcoming Data Structures Mid-Term Exam.",
+            "priority": "high",
+            "target_roles": ["student", "Faculty"],
+            "is_pinned": true
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 2,
+            "title": "Hostel Water Supply Maintenance"
+          }

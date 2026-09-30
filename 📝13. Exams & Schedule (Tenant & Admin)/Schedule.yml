@@ -1,0 +1,35 @@
+info:
+  name: Schedule
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{baseUrl}}/schedules/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "course": 1,
+        "faculty": 2,
+        "classroom": 1,
+        "day_of_week": "Monday",
+        "start_time": "09:00:00",
+        "end_time": "10:30:00",
+        "semester": "Semester 3",
+        "academic_year": "2026-2027"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

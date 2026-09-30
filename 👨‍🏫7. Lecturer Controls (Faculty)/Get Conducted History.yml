@@ -1,0 +1,52 @@
+info:
+  name: Get Conducted History
+  type: http
+  seq: 9
+
+http:
+  method: GET
+  url: "{{baseUrl}}/lecturer/conducted-history"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/lecturer/conducted-history"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "lecture_id": 1,
+              "topic": "Calculus II",
+              "date": "2026-07-08",
+              "attendance_percentage": "85.5%"
+            }
+          ]

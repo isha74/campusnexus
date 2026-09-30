@@ -1,0 +1,7 @@
+info:
+  name: 📢10. Audit Logs & Announcements
+  type: folder
+  seq: 2
+
+request:
+  auth: inherit

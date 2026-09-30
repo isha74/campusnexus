@@ -1,0 +1,68 @@
+info:
+  name: Create Inventory Suppliers
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/suppliers"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "name": "TechFab Electronics Supply Pvt Ltd",
+        "contact_person": "Ramesh Gupta",
+        "phone": "+91 9820011223",
+        "email": "orders@techfab.in",
+        "address": "Electronic City, Phase 1, Bangalore"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/suppliers"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "name": "TechFab Electronics Supply Pvt Ltd",
+            "contact_person": "Ramesh Gupta",
+            "phone": "+91 9820011223",
+            "email": "orders@techfab.in",
+            "address": "Electronic City, Phase 1, Bangalore"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "name": "Sun Spark Electronics",
+            "phone": "12345"
+          }

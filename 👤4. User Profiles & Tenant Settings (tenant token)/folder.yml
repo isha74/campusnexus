@@ -1,0 +1,7 @@
+info:
+  name: 👤4. User Profiles & Tenant Settings (tenant token)
+  type: folder
+  seq: 19
+
+request:
+  auth: inherit

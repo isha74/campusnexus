@@ -1,0 +1,27 @@
+info:
+  name: Get Announcement Detail
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/announcements/:pk"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  params:
+    - name: pk
+      value: "2"
+      type: path
+      description: The pk parameter
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

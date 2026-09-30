@@ -1,0 +1,64 @@
+info:
+  name: Student Scan QR to Board Bus
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{baseUrl}}/bus/scan/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "qr_token": "c948c1e9-feb8-47a3-afe5-23e884350e0f",
+        "device_id": "device_rahul_mobile_01"
+      }
+  auth:
+    type: bearer
+    token: "{{student_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/bus/scan/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "qr_token": "c948c1e9-feb8-47a3-afe5-23e884350e0f",
+            "device_id": "device_rahul_mobile_01"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "success",
+            "message": "Boarding logged successfully."
+          }

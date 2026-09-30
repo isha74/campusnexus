@@ -1,0 +1,7 @@
+info:
+  name: 👨‍🏫7. Lecturer Controls (Faculty)
+  type: folder
+  seq: 22
+
+request:
+  auth: inherit

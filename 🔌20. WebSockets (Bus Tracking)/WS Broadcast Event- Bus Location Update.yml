@@ -1,0 +1,30 @@
+info:
+  name: "WS Broadcast Event: Bus Location Update"
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: ws:/socket-broadcast-location-update
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  JSON payload broadcasted by the server to all tracking watchers on the route.
+
+  Broadcast Payload:
+  {
+    "type": "bus_location_update",
+    "driver_id": "3",
+    "driver_name": "Raj",
+    "lat": 12.9716,
+    "lng": 77.5946,
+    "trail": [[12.9716, 77.5946]],
+    "distance_km": 0.05,
+    "route": {"id": 1, "name": "North Route"}
+  }

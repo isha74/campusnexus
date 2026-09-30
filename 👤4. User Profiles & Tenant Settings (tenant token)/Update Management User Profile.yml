@@ -1,0 +1,25 @@
+info:
+  name: Update Management User Profile
+  type: http
+  seq: 11
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/management/user"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: "{}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

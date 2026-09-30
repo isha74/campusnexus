@@ -1,0 +1,67 @@
+info:
+  name: Create Valuation Scanned Papers
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/scanned-papers/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "session": 1,
+        "student": 1,
+        "status": "Pending",
+        "scanned_file_url": "https://storage.campusnexus.in/scans/2026/cs101_midterm_stu001.pdf"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/scanned-papers/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "session": 1,
+            "student": 1,
+            "status": "Pending",
+            "scanned_file_url": "https://storage.campusnexus.in/scans/2026/cs101_midterm_stu001.pdf"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "session_id": 1,
+            "student_id": "STU123",
+            "paper_code": "PAP-999"
+          }

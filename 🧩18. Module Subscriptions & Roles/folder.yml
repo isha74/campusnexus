@@ -1,0 +1,7 @@
+info:
+  name: 🧩18. Module Subscriptions & Roles
+  type: folder
+  seq: 10
+
+request:
+  auth: inherit

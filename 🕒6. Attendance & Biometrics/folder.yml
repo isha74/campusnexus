@@ -1,0 +1,7 @@
+info:
+  name: 🕒6. Attendance & Biometrics
+  type: folder
+  seq: 21
+
+request:
+  auth: inherit

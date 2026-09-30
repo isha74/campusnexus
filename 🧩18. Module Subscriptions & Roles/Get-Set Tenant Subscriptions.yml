@@ -1,0 +1,47 @@
+info:
+  name: Get/Set Tenant Subscriptions
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/tenant/subscriptions/2"
+  headers:
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+  auth:
+    type: bearer
+    token: "{{jwtToken}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/tenant/subscriptions/2"
+      method: GET
+      headers:
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "tenant_id": 1,
+            "active_modules": [
+              "attendance",
+              "bus_tracking",
+              "fees",
+              "payroll"
+            ]
+          }

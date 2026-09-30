@@ -1,0 +1,7 @@
+info:
+  name: ⚙️21. SaaS Management (admin)
+  type: folder
+  seq: 25
+
+request:
+  auth: inherit

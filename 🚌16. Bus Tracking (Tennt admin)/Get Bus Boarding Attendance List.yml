@@ -1,0 +1,52 @@
+info:
+  name: Get Bus Boarding Attendance List
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: "{{baseUrl}}/bus/attendance/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/bus/attendance/"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          [
+            {
+              "id": 50,
+              "student_name": "Demo Student",
+              "route_name": "North Route",
+              "boarding_time": "2026-07-08T08:15:00Z"
+            }
+          ]

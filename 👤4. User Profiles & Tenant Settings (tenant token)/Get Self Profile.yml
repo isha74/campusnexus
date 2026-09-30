@@ -1,0 +1,56 @@
+info:
+  name: Get Self Profile
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/user"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/user"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "user": {
+              "username": "demo_student",
+              "email": "student@college.edu",
+              "first_name": "Demo",
+              "last_name": "Student"
+            },
+            "role": "student",
+            "student_id": "STU123",
+            "contact_number": "+91 9999999999",
+            "consent_given": true
+          }

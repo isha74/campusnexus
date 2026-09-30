@@ -1,0 +1,76 @@
+info:
+  name: Create Fee Structure
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/fees/structures/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "name": "B.Tech Computer Science 2026 - Sem 1",
+        "department": 1,
+        "batch_academic_year": "2026-2027",
+        "items": [
+          {
+            "category": 1,
+            "amount": 45000.00
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/fees/structures/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "name": "B.Tech Computer Science 2026 - Sem 1",
+            "department": 1,
+            "batch_academic_year": "2026-2027",
+            "items": [
+              {
+                "category": 1,
+                "amount": 45000.00
+              }
+            ]
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1,
+            "amount": "45000.00"
+          }

@@ -1,0 +1,25 @@
+info:
+  name: Leave Balance
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{baseUrl}}/leave/balance"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: "{}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

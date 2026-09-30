@@ -1,0 +1,88 @@
+info:
+  name: Create Bus Route
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/bus/routes/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "North Route - Gate 1",
+        "stops_data": [
+          {
+            "name": "Gate 1",
+            "latitude": 12.9716,
+            "longitude": 77.5946,
+            "sequence": 1
+          },
+          {
+            "name": "Hostel A",
+            "latitude": 12.972,
+            "longitude": 77.595,
+            "sequence": 2
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/bus/routes/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "name": "North Route - Gate 1",
+            "stops_data": [
+              {
+                "name": "Gate 1",
+                "latitude": 12.9716,
+                "longitude": 77.5946,
+                "sequence": 1
+              },
+              {
+                "name": "Hostel A",
+                "latitude": 12.972,
+                "longitude": 77.595,
+                "sequence": 2
+              }
+            ]
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 1,
+            "name": "North Route - Gate 1"
+          }

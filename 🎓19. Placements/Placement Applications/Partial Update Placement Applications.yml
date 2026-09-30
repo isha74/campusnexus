@@ -1,0 +1,64 @@
+info:
+  name: Partial Update Placement Applications
+  type: http
+  seq: 4
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/placement-applications/1/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "status": "Selected",
+        "offered_ctc_lpa": "24.50",
+        "remarks": "Cleared Technical Round 2 and HR Interview"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/placement-applications/1/"
+      method: PATCH
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "status": "Selected",
+            "offered_ctc_lpa": "24.50",
+            "remarks": "Cleared Technical Round 2 and HR Interview"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "drive_id": 1,
+            "student_profile_id": 1
+          }

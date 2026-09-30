@@ -1,0 +1,45 @@
+info:
+  name: Role Module Permission
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/tenant/module-permissions/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: "{\r
+
+      \  \"group_name\": \"Faculty\",\r
+
+      \  \"allowed_modules\": [\r
+
+      \    \"attendance\",\r
+
+      \    \"schedule\",\r
+
+      \    \"assignments\",\r
+
+      \    \"exams\",\r
+
+      \    \"leave\",\r
+
+      \    \"announcements\"\r
+
+      \  ]\r
+
+      }\r\n"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

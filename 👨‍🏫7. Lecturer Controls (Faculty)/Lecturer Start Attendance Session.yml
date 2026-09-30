@@ -1,0 +1,62 @@
+info:
+  name: Lecturer Start Attendance Session
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/lecturer/start-attendance/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{faculty_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "lecture_id": 1,
+        "duration_minutes": 10
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/lecturer/start-attendance/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{faculty_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "lecture_id": 1,
+            "duration_minutes": 10
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "code": "XYZ9",
+            "message": "Attendance session started successfully."
+          }

@@ -1,0 +1,7 @@
+info:
+  name: 📊14. Analytics Dashboard (Tenant Admin)
+  type: folder
+  seq: 6
+
+request:
+  auth: inherit

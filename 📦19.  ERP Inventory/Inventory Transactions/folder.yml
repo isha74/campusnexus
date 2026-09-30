@@ -1,0 +1,7 @@
+info:
+  name: Inventory Transactions
+  type: folder
+  seq: 3
+
+request:
+  auth: inherit

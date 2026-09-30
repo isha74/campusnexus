@@ -1,0 +1,69 @@
+info:
+  name: Bulk Approve Manual Requests
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/lecturer/bulk-approve-manual-requests"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{jwtToken}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |-
+      {
+        "request_ids": [
+          4,
+          5,
+          6
+        ],
+        "action": "approve"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/lecturer/bulk-approve-manual-requests"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{jwtToken}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |-
+          {
+            "request_ids": [
+              4,
+              5,
+              6
+            ],
+            "action": "approve"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bulk override process completed."
+          }

@@ -1,0 +1,69 @@
+info:
+  name: Create Inventory Transactions
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/inventory-transactions/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "item": 1,
+        "transaction_type": "Issue",
+        "quantity": 5,
+        "department": 1,
+        "remarks": "Issued for CS101 Embedded Systems Workshop"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/inventory-transactions/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "item": 1,
+            "transaction_type": "Issue",
+            "quantity": 5,
+            "department": 1,
+            "remarks": "Issued for CS101 Embedded Systems Workshop"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "item_id": 1,
+            "transaction_type": "in",
+            "quantity": 10
+          }

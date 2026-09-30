@@ -1,0 +1,70 @@
+info:
+  name: Create Leave Type
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/leave/types/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "name": "Casual Leave",
+        "code": "CL",
+        "max_days": 5,
+        "is_paid": true,
+        "carry_forward": false,
+        "description": "Annual casual leave quota for teaching and non-teaching staff."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/leave/types/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "name": "Casual Leave",
+            "code": "CL",
+            "max_days": 5,
+            "is_paid": true,
+            "carry_forward": false,
+            "description": "Annual casual leave quota for teaching and non-teaching staff."
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": 2,
+            "name": "Sick Leave"
+          }

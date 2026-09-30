@@ -1,0 +1,67 @@
+info:
+  name: Create Hostel Rooms
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/hostel-rooms/"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer {{admin_token}}
+    - name: X-Tenant-Schema
+      value: "{{schema}}"
+  body:
+    type: json
+    data: |
+      {
+        "hostel": 1,
+        "room_number": "101",
+        "capacity": 2,
+        "rent_per_semester": "25000.00"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example Response
+    request:
+      url: "{{baseUrl}}/hostel-rooms/"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer {{admin_token}}
+        - name: X-Tenant-Schema
+          value: "{{schema}}"
+      body:
+        type: json
+        data: |
+          {
+            "hostel": 1,
+            "room_number": "101",
+            "capacity": 2,
+            "rent_per_semester": "25000.00"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "hostel_id": 1,
+            "room_number": "101",
+            "sharing_type": 2
+          }
